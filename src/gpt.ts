@@ -1,5 +1,6 @@
-const process = require("process");
+import process from "process";
 import { ChatGPTAPI, ChatMessage } from "chatgpt";
+import { type Message } from "whatsapp-web.js";
 
 // Environment variables
 require("dotenv").config();
@@ -12,7 +13,7 @@ const api = new ChatGPTAPI({
 // Mapping from number to last conversation id
 const conversations = {};
 
-const handleMessageGPT = async (message: any, prompt: any) => {
+export const handleMessageGPT = async (message: Message, prompt: string) => {
   try {
     // Get last conversation
     const lastConversation = conversations[message.from];
@@ -25,6 +26,7 @@ const handleMessageGPT = async (message: any, prompt: any) => {
 
     // Check if we have a conversation with the user
     let response: ChatMessage;
+
     if (lastConversation) {
       // Handle message with previous conversation
       response = await api.sendMessage(prompt, lastConversation);
@@ -56,5 +58,3 @@ const handleMessageGPT = async (message: any, prompt: any) => {
     );
   }
 };
-
-export { handleMessageGPT };
