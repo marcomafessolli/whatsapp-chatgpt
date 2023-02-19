@@ -6,7 +6,7 @@
   "author": "Askrella Software Agency UG (haftungsbeschränkt)",
   "scripts": {
     "start": "vite-node --watch src/index.ts",
-    "format": "prettier --write ."
+    "prettier": "prettier --write ."
   },
   "license": "MIT",
   "dependencies": {
